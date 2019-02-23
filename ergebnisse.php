@@ -52,37 +52,41 @@ $ergebnisse = $db->ladeErgebnisse();
 
 ?>
 
-<div class="container card-body">
+<div class="container  card-body" style=" margin-left: 40px; ">
 
-<br>
-    <div class="table-responsive row">
-        <div class="col-md-8 offset-md-2">
+<br><br>
+    <div class="table-responsive row"  style="  width: 1430px;">
 
-            <table class="table">
-                <thead  style="text-align:center">
+
+            <table class="table" style="width: 1430px" >
                 <th class="table-info">Teilnehmer</th>
-                <th class="table-info">Geschlecht</th>
                 <th class="table-info">Alter</th>
-                <th class="table-info">Frage</th>
-                <th class="table-info">Antwort</th>
+
+                <th class="table-info">Geschlecht</th>
+                <th class="table-info">Achtest du aktiv auf deinen Plastikverbrauch?</th>
+                <th class="table-info">Wie schätzt du deinen Plastikverbrauch auf einer Skala von 0-5 ein?</th>
+                <th class="table-info">Für welche Produkte würdest du eine Plastiktüte verwenden?</th>
+                <th class="table-info">Wie könnten Supermärkte deinen Plastikverbrauch reduzieren?</th>
                 </thead>
                 <tbody>
 
                 <?php foreach ($ergebnisse as $i => $antwort): ?>
                     <tr>
-                        <td><?= $antwort['teilnehmerId'] ?></td>
-                        <td><?= $antwort['geschlecht'] ?></td>
+                        <td><?= $i ?></td>
+
                         <td><?= $antwort['alter'] ?></td>
-                        <td><?= $antwort['frage'] ?></td>
-                        <td><?= (1 == $antwort['fragenId']
-                                ? ($antwort['antwort'] ? 'ja' : 'nein')
-                                : $antwort['antwort']) ?></td>
+                        <td><?= $antwort['geschlecht'] ?></td>
+                        <td><?= $antwort[1] ?></td>
+                        <td><?= $antwort[2] ?></td>
+                        <td><?= $antwort[3] ?></td>
+                        <td><?= $antwort[4] ?></td>
+
                     </tr>
                 <?php endforeach; ?>
                 </tbody>
             </table>
 
-        </div>
+
     </div>
 
 
@@ -104,7 +108,7 @@ $ergebnisse = $db->ladeErgebnisse();
 <footer class="page-footer font-small special-color-dark pt-4">
     <div class="py-1" style="background-color:rgba(148,148,148,0.4) ; color: #f5f1ed ;" >
      <p class="text-secondary">
-         &nbsp;   <img src="uni-logo.png" width="75px;" height="75px;" >
+         &nbsp;   <img src="LogoAS.png" width="75px;" height="75px;" >
          &nbsp;  &nbsp;   Die Umfrage wurde erstellt von :  Johanna Zellmer &amp Ghada Didri
                                      &amp  Richard Henkenjohann &nbsp;&amp Vanessa Brinkmann
                     </p>

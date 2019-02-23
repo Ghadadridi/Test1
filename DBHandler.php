@@ -31,9 +31,9 @@ class DBHandler extends DBConfig
     public function ladeErgebnisse(): array
     {
         $sqlAnfrage = <<<SQL
-SELECT antwort.id AS antwortId, teilnehmerId, fragenId, `value` AS antwort, `alter`, geschlecht, frage FROM antwort
+SELECT antwort.id AS antwortId, teilnehmerId, fragenId, `value` AS antwort,  `alter`,  geschlecht, frage FROM antwort
 INNER JOIN teilnehmer ON teilnehmer.id=antwort.teilnehmerId
-INNER JOIN frage ON frage.id=antwort.fragenId
+INNER JOIN frage ON frage.id=antwort.fragenId ORDER BY `teilnehmerId`
 
 SQL;
         $sqlQuery = $sqlAnfrage or die ('Error in the consult…' . mysqli_error($this->connectionStringPHP));
@@ -43,7 +43,13 @@ SQL;
         $ergebnisse = array();
 
         while ($row = $result->fetch_assoc()) {
-            $ergebnisse[] = $row;
+            $tid=$row['teilnehmerId'];
+            $fid=$row['fragenId'];
+            $ergebnisse[$tid][$fid] = $row['antwort'];
+            $alter=$row['alter'];
+            $geschlecht=$row['geschlecht'];
+            $ergebnisse[$tid]['alter'] = $alter;
+            $ergebnisse[$tid]['geschlecht'] = $geschlecht;
         }
 
         return $ergebnisse;
@@ -63,7 +69,7 @@ SQL;
     {
         if ($sqlQuery = mysqli_prepare(
             $this->connectionStringPHP,
-            'INSERT INTO teilnehmer (`alter`, `geschlecht`) VALUES (?,?)'
+            'INSERT INTO teilnehmer (`id`,`alter`, `geschlecht`) VALUES (NULL,?,?)'
         )) {
             mysqli_stmt_bind_param(
                 $sqlQuery,
@@ -120,6 +126,27 @@ SQL;
 
         throw new RuntimeException($error);
     }
+
+    public function SelectTeilnehmer(string $geschlecht): array
+    {
+        $sqlAnfrage = <<<SQL
+SELECT `id`, `alter`, `geschlecht` FROM `teilnehmer` WHERE `geschlecht`='.$geschlecht.' 
+
+SQL;
+        $sqlQuery = $sqlAnfrage or die ('Error in the consult…' . mysqli_error($this->connectionStringPHP));
+
+        $result = mysqli_query($this->connectionStringPHP, $sqlQuery);
+
+        $ergebnisse = array();
+
+        while ($row = $result->fetch_assoc()) {
+            $ergebnisse[] = $row;
+            $zah=$result->num_rows();
+        }
+
+        return $ergebnisse;
+    }
+
 
 
 }

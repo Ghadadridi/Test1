@@ -49,8 +49,8 @@
 
     $db = new DBHandler();
 
-    if ('umfrage_zero_waste' === $_POST['FORM_SUBMIT']) {
-
+    if (isset($_POST['FORM_SUBMIT'])) {
+echo 'tessssssssssst';
         $submitInput = true;
 
         foreach ($_POST as $field => $item) {
@@ -134,12 +134,12 @@
                     <label><strong>3. Achtest du aktiv auf deinen Plastikverbrauch?</strong></label>
                     <div class="custom-control custom-radio">
                         <input type="radio" id="input_plastikverbrauch_1" name="plastikverbrauch"
-                               class="custom-control-input" value="1">
+                               class="custom-control-input" value="Ja">
                         <label class="custom-control-label" for="input_plastikverbrauch_1">Ja</label>
                     </div>
                     <div class="custom-control custom-radio">
                         <input type="radio" id="input_plastikverbrauch_0" name="plastikverbrauch"
-                               class="custom-control-input" value="0">
+                               class="custom-control-input" value="Nein">
                         <label class="custom-control-label" for="input_plastikverbrauch_0">Nein</label>
                     </div>
                 </div>
@@ -205,7 +205,7 @@
         </div>
         <div class="row">
             <div class="col-md-6" style=" margin-left: 150px ">
-                <button type="submit" id="submit" class="btn btn-info" ><strong>Absenden <img src="fly_send_paper_submit_plane-512.png" width="25px;" height="25px;" ></strong></button>
+                <button type="submit" id="submit" class="btn btn-info" ><strong>Absenden <img src="ASlogo.png" width="25px;" height="25px;" ></strong></button>
             </div>
         </div>
         <br>
@@ -228,10 +228,10 @@
 <footer class="page-footer font-small special-color-dark pt-4">
     <div class="py-1" style="background-color:rgba(148,148,148,0.4) ; color: #f5f1ed ;" >
         <p class="text-secondary">
-            &nbsp;   <img src="uni-logo.png" width="75px;" height="75px;" >
+            &nbsp;  &nbsp;  <img src="LogoAS.png" width="85px;" height="90px; ; " >
             &nbsp;  &nbsp;   Die Umfrage wurde erstellt von :
             &nbsp;              Johanna Zellmer
-            &nbsp;   &amp   &nbsp;    Ghada Didri
+            &nbsp;&amp   &nbsp;    Ghada Didri
             &nbsp;    &amp    &nbsp;    Richard Henkenjohann
             &nbsp;&amp &nbsp;    Vanessa Brinkmann
         </p>
