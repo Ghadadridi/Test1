@@ -85,7 +85,7 @@ $ergebnisse = $db->ladeErgebnisse();
                 <?php endforeach; ?>
                 </tbody>
             </table>
-
+        <br>
 
     </div>
 
